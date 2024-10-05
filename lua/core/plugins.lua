@@ -8,19 +8,23 @@ local ensure_packer = function()
   end
   return false
 end
-
 local packer_bootstrap = ensure_packer()
-
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use "nvim-tree/nvim-tree.lua"
-  use "nvim-tree/nvim-web-devicons"
-  use "folke/tokyonight.nvim"
-  use "nvim-lualine/lualine.nvim"
+  use "nvim-tree/nvim-tree.lua" -- File explorer
+  use "nvim-tree/nvim-web-devicons" -- Icons
+  use "folke/tokyonight.nvim" -- Theme
+  use "nvim-lualine/lualine.nvim" -- Status line
+  use 'williamboman/mason.nvim' -- Mason plugin
+  use 'williamboman/mason-lspconfig.nvim' -- Mason LSP config
+  use 'neovim/nvim-lspconfig' -- LSP configurations
+  use 'hrsh7th/nvim-cmp' -- autocompletion plugin
+  use  'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+  use  'L3MON4D3/LuaSnip' -- snippet plugin
+  use  'saadparwaiz1/cmp_luasnip' -- snippet source for nvim-cmp
   -- My plugins here
   -- use 'foo1/bar1.nvim'
   -- use 'foo2/bar2.nvim'
-
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
