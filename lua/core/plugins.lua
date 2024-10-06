@@ -19,9 +19,9 @@ return require('packer').startup(function(use)
   use 'williamboman/mason-lspconfig.nvim' -- Mason LSP config
   use 'neovim/nvim-lspconfig' -- LSP configurations
   use 'hrsh7th/nvim-cmp' -- autocompletion plugin
-  use  'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-  use  'L3MON4D3/LuaSnip' -- snippet plugin
-  use  'saadparwaiz1/cmp_luasnip' -- snippet source for nvim-cmp
+  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+  use 'L3MON4D3/LuaSnip' -- snippet plugin
+  use 'saadparwaiz1/cmp_luasnip' -- snippet source for nvim-cmp
   -- My plugins here
   -- use 'foo1/bar1.nvim'
   -- use 'foo2/bar2.nvim'

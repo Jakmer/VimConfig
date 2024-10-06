@@ -22,9 +22,19 @@ cmp.setup({
     { name = 'path' },
   },
 })
+
+-- Function to find the root directory of the git repository
+local function find_git_root()
+  local handle = io.popen("git rev-parse --show-toplevel 2>/dev/null")
+  local result = handle:read("*a")
+  handle:close()
+  return result:match("^%s*(.-)%s*$") -- Trim whitespace
+end
+
 -- LSP for C/C++
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require('lspconfig')['clangd'].setup {
+  cmd = { "clangd", "--compile-commands-dir=/home/jakub/Projects/ChessEngine" },
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     -- Keybindings
@@ -33,5 +43,6 @@ require('lspconfig')['clangd'].setup {
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts) -- Show hover documentation
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts) -- Go to implementation
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts) -- Show signature help
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<Cmd>lua vim.lsp.buf.format{ async = true }<CR>', opts) -- Format code
   end,
 }
