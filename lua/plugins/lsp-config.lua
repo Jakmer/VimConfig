@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "clangd", "rust_analyzer" }
+        ensure_installed = { "lua_ls", "clangd", "rust_analyzer", "bashls"}
       })
     end
   },
@@ -27,6 +27,15 @@ return {
         root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git")
       })
       lspconfig.rust_analyzer.setup({
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+        end
+      })
+      lspconfig.bashls.setup({
+        capabilities = capabilities,
+        filetypes = { "sh", "bash" }
+      })
+      lspconfig.texlab.setup({
         capabilities = capabilities,
         on_attach = function(client, bufnr)
         end

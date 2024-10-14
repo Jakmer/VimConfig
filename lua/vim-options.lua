@@ -41,3 +41,10 @@ vim.api.nvim_set_keymap('i', '<C-J>', '<Esc>', { noremap = true, silent = true }
 
 -- Map Ctrl + J in visual mode to exit to normal mode
 vim.api.nvim_set_keymap('v', '<C-J>', '<Esc>', { noremap = true, silent = true })
+
+-- Some setting for latex
+vim.cmd([[filetype plugin indent on]])
+vim.cmd([[syntax enable]])
+
+vim.g.vimtex_view_method = 'zathura'
+vim.g.vimtex_compiler_method = 'latexmk'
