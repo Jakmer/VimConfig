@@ -17,5 +17,6 @@ return {
     -- Move to previous/next buffer
     map('n', '<C-h>', '<Cmd>BufferPrevious<CR>', opts)
     map('n', '<C-l>', '<Cmd>BufferNext<CR>', opts)
+    map('n', '<leader>q', '<Cmd>BufferClose<CR>', opts)
   end,
 }

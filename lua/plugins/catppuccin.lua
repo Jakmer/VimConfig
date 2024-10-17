@@ -4,6 +4,14 @@ return {
   name = "catppuccin", 
   priority = 1000,
   config = function()
-    vim.cmd.colorscheme "catppuccin"
+    require("catppuccin").setup({
+      flavour = "macchiato",
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        telescope = true,
+      },
+    })
+    vim.cmd.colorscheme("catppuccin")
   end
 }
