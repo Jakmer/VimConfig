@@ -37,6 +37,10 @@ vim.api.nvim_set_keymap('n', 'y', '"+y', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 'y', '"+y', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'yy', '"+yy', { noremap = true, silent = true })
 
+-- Delete and copy to system clipboard
+vim.api.nvim_set_keymap('n', 'd', '"*d', { noremap = true, silent = true })  -- Normal delete
+vim.api.nvim_set_keymap('v', 'd', '"*d', { noremap = true, silent = true })  -- Visual delete
+
 -- Map Ctrl + J in insert mode to exit to normal mode
 vim.api.nvim_set_keymap('i', '<C-J>', '<Esc>', { noremap = true, silent = true })
 
@@ -49,3 +53,14 @@ vim.cmd([[syntax enable]])
 
 vim.g.vimtex_view_method = 'zathura'
 vim.g.vimtex_compiler_method = 'latexmk'
+
+-- Auto save
+vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
+  pattern = "*",
+  callback = function()
+    if vim.fn.expand("%:e") ~= "lua" and vim.bo.modifiable and vim.bo.modified then
+      vim.cmd("silent! write")
+    end
+  end
+})
+

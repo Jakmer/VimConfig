@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "clangd" }
+        ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "clangd", "pyright", "julials", "omnisharp", "texlab" }
       })
     end
   },
@@ -24,8 +24,8 @@ return {
         vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr })
         vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr })
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
-        vim.keymap.set("n", "<leader>f", function() 
-          vim.lsp.buf.format({ bufnr = bufnr }) 
+        vim.keymap.set("n", "<leader>f", function()
+          vim.lsp.buf.format({ bufnr = bufnr })
         end, { noremap = true, silent = true })
       end
 
@@ -58,6 +58,68 @@ return {
         capabilities = capabilities,
         on_attach = on_attach
       })
+
+      lspconfig.pyright.setup({
+        capabilities = capabilities,
+        on_attach = on_attach
+      })
+
+      lspconfig.julials.setup({
+        cmd = { "julia", "--startup-file=no", "--history-file=no", "-e", "using LanguageServer, SymbolServer; server = LanguageServer.LanguageServerInstance(stdin, stdout); run(server)" },
+        filetypes = { "julia" },
+        root_dir = lspconfig.util.root_pattern("Project.toml", ".git"),
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          julia = {
+            format = {
+              indent = 4,
+              indentChar = " ",
+              useTabs = false,
+            },
+            diagnostics = {
+              enable = true,
+            },
+            languageServer = {
+              useCompiler = true,
+            }
+          }
+        }
+      })
+
+    lspconfig.omnisharp.setup{
+        cmd = { "dotnet", "/home/jakub/Tools/omnisharp/OmniSharp.dll" },
+        on_attach = on_attach,
+        capabilities = capabilities,
+        root_dir = lspconfig.util.root_pattern(".git", "global.json", "*.sln", "*.csproj"),
+        settings = {
+            omnisharp = {
+                useModernNet = true,
+            },
+        },
+    }
+
+    lspconfig.texlab.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          texlab = {
+            build = {
+              executable = "latexmk",
+              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+              onSave = true
+            },
+            forwardSearch = {
+              executable = "zathura",
+              args = { "--synctex-forward", "%l:1:%f", "%p" }
+            },
+            lint = {
+              onChange = true
+            },
+          }
+        }
+      })
+
     end
   }
 }
