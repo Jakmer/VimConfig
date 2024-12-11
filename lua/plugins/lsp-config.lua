@@ -24,7 +24,7 @@ return {
         vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr })
         vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr })
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
-        vim.keymap.set("n", "<leader>f", function()
+        vim.keymap.set("n", "<leader>fc", function()
           vim.lsp.buf.format({ bufnr = bufnr })
         end, { noremap = true, silent = true })
       end
@@ -37,9 +37,6 @@ return {
       lspconfig.clangd.setup({
         capabilities = capabilities,
         root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
-        -- handlers = {
-        --   ["textDocument/publishDiagnostics"] = function() end
-        -- },
         settings = {
           clangd = {
             diagnostics = {
@@ -48,11 +45,7 @@ return {
           },
         },
         on_attach = on_attach,
-          formatting = {
-          tabSize = 4,
-          indentWidth = 4,
-          useTab = false,
-        }
+        cmd = { "clangd", "--fallback-style=none" },
       })
 
       lspconfig.rust_analyzer.setup({
