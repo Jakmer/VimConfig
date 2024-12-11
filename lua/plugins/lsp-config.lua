@@ -36,7 +36,7 @@ return {
 
       lspconfig.clangd.setup({
         capabilities = capabilities,
-        root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
+        root_dir = lspconfig.util.root_pattern("compile_commands.json"),
         settings = {
           clangd = {
             diagnostics = {
