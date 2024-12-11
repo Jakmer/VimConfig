@@ -3,7 +3,21 @@ vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 
+-- for c++ files set 4 spaces
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "cpp", "c", "h" },
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.softtabstop = 4
+    vim.bo.shiftwidth = 4
+  end,
+})
+
 vim.g.mapleader = ' '
+
+-- Sets the minimum number of lines visible around the cursor.
+-- The screen will start scrolling when the cursor is within 10 lines from the top or bottom of the visible area.
+vim.opt.scrolloff = 10
 
 vim.opt.backspace = '2'
 vim.opt.showcmd = true

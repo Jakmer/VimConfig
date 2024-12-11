@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "clangd", "pyright", "julials", "omnisharp", "texlab" }
+        ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "clangd", "pyright", "julials", "omnisharp", "texlab", "cmake" }
       })
     end
   },
@@ -37,10 +37,22 @@ return {
       lspconfig.clangd.setup({
         capabilities = capabilities,
         root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
-        handlers = {
-          ["textDocument/publishDiagnostics"] = function() end
+        -- handlers = {
+        --   ["textDocument/publishDiagnostics"] = function() end
+        -- },
+        settings = {
+          clangd = {
+            diagnostics = {
+              enable = true,
+            },
+          },
         },
-        on_attach = on_attach
+        on_attach = on_attach,
+          formatting = {
+          tabSize = 4,
+          indentWidth = 4,
+          useTab = false,
+        }
       })
 
       lspconfig.rust_analyzer.setup({
@@ -119,6 +131,14 @@ return {
           }
         }
       })
+
+    lspconfig.cmake.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = { "cmake-language-server" },
+        filetypes = { "cmake" },
+        root_dir = lspconfig.util.root_pattern("CMakeLists.txt", ".git"),
+    })
 
     end
   }
