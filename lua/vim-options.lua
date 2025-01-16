@@ -38,7 +38,7 @@ vim.cmd [[ set termguicolors ]]
 
 --Line numbers
 vim.wo.number = true
-vim.keymap.set('n', '<leader>h', 'nohlsearch<CR>')
+vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 
 -- Paste from system clipboard in normal mode
 vim.api.nvim_set_keymap('n', 'p', '"+p', { noremap = true, silent = true })

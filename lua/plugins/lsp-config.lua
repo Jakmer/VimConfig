@@ -25,7 +25,7 @@ return {
         vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr })
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
         vim.keymap.set("n", "<leader>fc", function()
-          vim.lsp.buf.format({ bufnr = bufnr })
+          vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
         end, { noremap = true, silent = true })
       end
 
