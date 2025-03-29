@@ -79,5 +79,16 @@ vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
   end
 })
 
+-- Show file full path
+vim.api.nvim_set_keymap('n', '<leader>p', ':echo expand("%:p")<CR>', { noremap = true, silent = true})
+
+-- Enable line wrapping globally
+vim.opt.wrap = true
+
 -- Set mouse off
 vim.opt.mouse = ""
+
+-- Set relative number
+vim.opt.number = true
+vim.opt.relativenumber = true
+
