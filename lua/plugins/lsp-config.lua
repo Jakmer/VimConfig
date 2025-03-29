@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "clangd", "pyright", "julials", "omnisharp", "texlab", "cmake" }
+        ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "clangd", "pyright", "julials", "omnisharp", "texlab", "cmake", "gopls" }
       })
     end
   },
@@ -131,6 +131,23 @@ return {
         cmd = { "cmake-language-server" },
         filetypes = { "cmake" },
         root_dir = lspconfig.util.root_pattern("CMakeLists.txt", ".git"),
+    })
+
+    lspconfig.gopls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      cmd = { "gopls" },
+      settings = {
+        gopls = {
+          analyses = {
+            unusedparams = true,
+            unreachable = true,
+          },
+          staticcheck = true,
+        }
+      },
+      filetypes = { "go" },
+      root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
     })
 
     end
