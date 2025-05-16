@@ -40,6 +40,9 @@ vim.cmd [[ set termguicolors ]]
 vim.wo.number = true
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 
+-- Restart lsp
+vim.keymap.set('n', '<leader>lp', ':LspRestart<CR>')
+
 -- Paste from system clipboard in normal mode
 vim.api.nvim_set_keymap('n', 'p', '"+p', { noremap = true, silent = true })
 
@@ -91,4 +94,9 @@ vim.opt.mouse = ""
 -- Set relative number
 vim.opt.number = true
 vim.opt.relativenumber = true
+
+-- Set python
+vim.g.python3_host_prog = '/usr/bin/python3'
+
+vim.api.nvim_set_keymap('n', '<leader>lp', ':LspRestart<CR>', { noremap = true, silent = true })
 

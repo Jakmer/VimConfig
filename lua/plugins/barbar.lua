@@ -18,5 +18,6 @@ return {
     map('n', '<C-h>', '<Cmd>BufferPrevious<CR>', opts)
     map('n', '<C-l>', '<Cmd>BufferNext<CR>', opts)
     map('n', '<leader>q', '<Cmd>BufferClose<CR>', opts)
+    map('n', '<leader>bq', '<Cmd>BufferCloseAllButCurrent<CR>', opts)
   end,
 }
