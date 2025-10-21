@@ -1,0 +1,27 @@
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+alias ll='ls -alhF --color=auto'
+alias la='ls -A --color=auto'
+alias l='ls -CF --color=auto'
+
+alias c='clear'
+
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -v'
+alias gp='git push'
+alias gl='git pull'
+alias gd='git diff'
+
+alias n='nvim'
+alias tm='tmux'
+
+alias rg='rg --hidden --files'
+
+alias cat="batcat --style=plain"
+
+alias r="ranger"
+
+export EDITOR='nvim'
